@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RePatch UI</title>
+    <link rel="stylesheet" href="../../node_modules/materialize-css/dist/css/materialize.min.css">
+    <link rel="stylesheet" href="../../material-icons/material-icons.css">
+</head>
+
+<body class="">
+    <div class="row" id="pmodal">
+        <div class="col s4 offset-s4">
+            <div class="card">
+                <div class="card-image">
+                    <div class="card-content">
+                        <p id="pmodal-content">I am a very simple card. I am good at containing small bits of
+                            information.
+                            I am convenient because I require little markup to use effectively.</p>
+                        <div class="progress progress-blue-only">
+                            <div class="determinate" id="pmodal-progress" style="width: 70%"></div>
+                        </div>
+
+                    </div>
+                    <div class="card-action">
+                        <a href="#" id="pmodal-cancel">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6 offset-s3">
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">explore</i>Add a map</div>
+                    <div class="collapsible-body">
+                        <div class="row">
+                            <div class="col s12">
+                                <span>
+                                    <button class="btn waves-effect waves-light" type="submit" name="action"
+                                        onclick="action('load:pc');">
+                                        From your computer
+                                        <i class="material-icons right">publish</i>
+                                    </button>
+                                </span>
+                                <span>
+                                    <button class="btn waves-effect waves-light" type="submit" name="action"
+                                        onclick="action('load:phone');">
+                                        From your phone's internal storage.
+                                        <i class="material-icons right">publish</i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s8">
+                                <select id="modeselect">
+                                    <option value="GEMGRAB">Gem grab</option>
+                                    <option value="SHOWDOWN">Showdown</option>
+                                </select>
+                                <label>Map type</label>
+                            </div>
+                            <div class="input-field col s4">
+                                <input id="mapname" type="text">
+                                <label for="mapname">Map name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <span>
+                                    <button class="btn waves-effect waves-light disabled" id="addq" type="submit"
+                                        name="action" onclick="action('stage');">
+                                        Add to queue!
+                                        <i class="material-icons right">library_add</i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">swap_vert</i>Actions</div>
+                    <div class="collapsible-body">
+                        <span>
+                            <button class="btn waves-effect waves-light" type="submit" name="action"
+                                onclick="action('download');">
+                                Download
+                                <i class="material-icons right">get_app</i>
+                            </button>
+                        </span>
+                        <span>
+                            <button class="btn waves-effect waves-light" type="submit" name="action"
+                                onclick="action('upload');">
+                                Push
+                                <i class="material-icons right">publish</i>
+                            </button>
+                        </span>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">room</i>Maps</div>
+                    <div class="collapsible-body"><span>
+                            <ul class="collection with-header">
+                                <li class="collection-header">
+                                    <h4>Installed</h4>
+                                </li>
+                                <span id="installed-coll">
+                                    <li class="collection-item">Alvin</li>
+                                </span>
+                                <li class="collection-header">
+                                    <h4>Queued</h4>
+                                </li>
+
+                                <span id="q-coll">
+                                    <li class="collection-item">Alvin</li>
+                                </span>
+                            </ul>
+                        </span></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="fileselmodal" class="modal">
+        <div class="modal-content">
+            <h4>Select a file</h4>
+            <p class="yellow-text text-darken-2">NOTE: only .txt files with "BrawlMaker" are treated as maps</p>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <select id="fileselect">
+                        <option value="GEMGRAB">Gem grab</option>
+                    </select>
+                    <label>Map type</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat" onclick="mobileFileAddCommit();">Add</a>
+                <a href="#!" class="modal-close waves-effect waves-red btn-flat" onclick="rejectMobileFileCommit();">Cancel</a>
+            </div>
+        </div>
+        <script>
+            window.$ = window.jQuery = require('jquery');
+        </script>
+        <script src="../../node_modules/materialize-css/dist/js/materialize.min.js"></script>
+        <script defer src="index.js"></script>
+</body>
+
+</html>
