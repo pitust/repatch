@@ -87,8 +87,9 @@ c.once('ready', function () {
 c.on('error', function (e) {
     M.toast({ html: e.message, classes: 'red' });
 })
+let ip = prompt('Please enter the IP address from WiFi FTP Server', '192.168.');
 c.connect({
-    host: '192.168.86.144',
+    host: ip,
     port: 2221
 });
 module.exports = {
