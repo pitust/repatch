@@ -7,7 +7,8 @@ const PACKAGE = REBRAWL_PACKAGE;
 let PACKAGE_ID = 'ReBrawl';
 const PACKAGE_DIR = VA_DIR + '/virtual/data/user/0/' + PACKAGE;
 const LOGIC_DIR = PACKAGE_DIR + '/update/csv_logic';
-
+if (!fs.existsSync('tmp')) fs.mkdirSync('tmp');
+if (!fs.existsSync('tmp/mod')) fs.mkdirSync('tmp/mod');
 module.exports.test = async function test() {
     try {
         await ftpapi.ls(VA_DIR);
@@ -33,6 +34,7 @@ module.exports.download = async function download(lenCb, progressCb) {
     let files = await ftpapi.ls(LOGIC_DIR);
     lenCb(files.length + 1);
     let p = 0;
+    for (let f of fs.readdirSync('tmp/mod')) fs.unlinkSync('tmp/mod/' + f);
     for (let f of files) {
         console.log('Downloading %s', f);
         progressCb(p++);
