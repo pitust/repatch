@@ -57,8 +57,15 @@
                         <div class="row">
                             <div class="input-field col s8">
                                 <select id="modeselect">
+                                    <option value="BOUNTY">Bounty</option>
+                                    <option value="BRAWLBALL">Brawl ball</option>
                                     <option value="GEMGRAB">Gem grab</option>
+                                    <option value="HEIST">Heist</option>
+                                    <option value="HOTZONE">Hot zone</option>
+                                    <option value="LONESTAR">Lonestar</option>
                                     <option value="SHOWDOWN">Showdown</option>
+                                    <option value="SIEGE">Siege</option>
+                                    <option value="TAKEDOWN">Takedown</option>
                                 </select>
                                 <label>Map type</label>
                             </div>
@@ -130,14 +137,15 @@
             <div class="row">
                 <div class="input-field col s12">
                     <select id="fileselect">
-                        <option value="GEMGRAB">Gem grab</option>
                     </select>
                     <label>Map type</label>
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="#!" class="modal-close waves-effect waves-green btn-flat" onclick="mobileFileAddCommit();">Add</a>
-                <a href="#!" class="modal-close waves-effect waves-red btn-flat" onclick="rejectMobileFileCommit();">Cancel</a>
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat"
+                    onclick="mobileFileAddCommit();">Add</a>
+                <a href="#!" class="modal-close waves-effect waves-red btn-flat"
+                    onclick="rejectMobileFileCommit();">Cancel</a>
             </div>
         </div>
         <script>

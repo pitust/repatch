@@ -8,15 +8,36 @@ let fs = require('fs');
 */
 const MAP_ID_TRANSFORM = {
     SHOWDOWN: 'Survival',
-    GEMGRAB: 'Gemgrab'
+    GEMGRAB: 'Gemgrab',
+    BOUNTY: 'Wanted',
+    HOTZONE: 'KingOfHill',
+    LONESTAR: 'SoloBounty',
+    TAKEDOWN: 'BossRace',
+    SIEGE: 'Siege',
+    BRAWLBALL: 'Ball',
+    HEIST: 'Heist',
 }
 const MAP_ID_LOOKUP = {
     SHOWDOWN: 'SurvivalTeam',
-    GEMGRAB: 'Gemgrab'
+    GEMGRAB: 'Gemgrab',
+    BOUNTY: 'Wanted',
+    HOTZONE: 'KingOfHill',
+    LONESTAR: 'SoloBounty',
+    TAKEDOWN: 'BossRace',
+    SIEGE: 'Siege',
+    BRAWLBALL: 'Ball',
+    HEIST: 'Heist',
 }
 const MAP_ID_TO_GAMEMODE = {
     GEMGRAB: 'GOLDRUSH',
-    SHOWDOWN: 'BATTLE_ROYALE'
+    SHOWDOWN: 'BATTLE_ROYALE',
+    BOUNTY: 'WANTED',
+    HOTZONE: 'KING_OF_HILL',
+    LONESTAR: 'LONESTAR',
+    TAKEDOWN: 'BOSS_RACE',
+    SIEGE: 'ROBO_WARS',
+    BRAWLBALL: 'BALL',
+    HEIST: 'BANKHEIST',
 }
 module.exports.map = function (config, patched = []) {
     let mapFile = config.from.split('\n');
@@ -40,18 +61,24 @@ module.exports.map = function (config, patched = []) {
     })
     console.log(selId, tid, idx);
     for (let row of mapFile) {
+        if (maps[idx][1].trim()) break;
         maps[idx++][2] = row;
     }
     let translationRow = (','.repeat(21)).split(',');
     translationRow = translationRow.map(_e => config.name);
     translationRow[0] = tid;
-    translations[translations.findIndex(e => {
+    let tidx = translations.findIndex(e => {
         try {
             return JSON.parse(e[0]) == tid;
         } catch (_e) {
             return e[0] == tid;
         }
-    })] = translationRow;
+    });
+    if (tidx == -1) {
+        translations.push(translationRow);
+    } else {
+        translations[tidx] = translationRow;
+    }
     fs.writeFileSync('tmp/mod/maps.csv', `"CodeName","Group","Data","ConstructFromBlocks"
 "String","String","String","boolean"\n` + maps.map(e => e.join(',')).join('\n') + '\n');
     fs.writeFileSync('tmp/mod/texts.csv', `TID,EN,AR,CN,CNT,DE,ES,FI,FR,HE,ID,IT,JP,KR,MS,NL,PL,PT,RU,TH,TR,VI
