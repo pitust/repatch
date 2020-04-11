@@ -132,7 +132,7 @@
     <div id="fileselmodal" class="modal">
         <div class="modal-content">
             <h4>Select a file</h4>
-            <p class="yellow-text text-darken-2">NOTE: only .txt files with "BrawlMaker" are treated as maps</p>
+            <p class="yellow-text text-darken-2 notice">NOTE: only .txt files with "BrawlMaker" are treated as maps</p>
 
             <div class="row">
                 <div class="input-field col s12">
@@ -144,6 +144,8 @@
             <div class="modal-footer">
                 <a href="#!" class="modal-close waves-effect waves-green btn-flat"
                     onclick="mobileFileAddCommit();">Add</a>
+                <a href="#!" class="modal-close waves-effect waves-yellow btn-flat"
+                    onclick="action('all-mobile');">Show all</a>
                 <a href="#!" class="modal-close waves-effect waves-red btn-flat"
                     onclick="rejectMobileFileCommit();">Cancel</a>
             </div>

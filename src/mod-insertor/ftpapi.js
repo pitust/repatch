@@ -3,7 +3,7 @@ let Client = require('ftp');
 let path = require('path');
 let fs = require('fs');
 let Dialogs = require('dialogs')
-let dialogs = Dialogs(opts={})
+let dialogs = Dialogs(opts = {})
 
 let c = new Client();
 async function p(cb) {
@@ -88,16 +88,25 @@ c.once('ready', function () {
 });
 c.on('error', function (e) {
     M.toast({ html: e.message, classes: 'red' });
-})
-dialogs.prompt('Please enter the IP address from WiFi FTP Server', '192.168.', ip => {
+});
+function askIP() {
+    dialogs.prompt('Please enter the IP address from WiFi FTP Server', '192.168.', ip => {
+        c.connect({
+            host: ip,
+            port: 2221
+        });
+    });
+}
+function setIP(ip) {
     c.connect({
         host: ip,
         port: 2221
     });
-});
-
+}
 module.exports = {
     ls,
     download,
-    upload
+    upload,
+    askIP,
+    setIP,
 }
