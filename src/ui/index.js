@@ -2,6 +2,7 @@ console.log('RePatch v1.0.0 (c) 2020 Piotr Stelmaszek');
 let mod = require('../mod-insertor');
 let ftpapi = require('../mod-insertor/ftpapi');
 M.AutoInit()
+let down = false;
 let pmodal = function pmodal(text, cancel, total = 100) {
     let canceled = false;
     document.getElementById('pmodal-cancel').onclick = function (ev) {
@@ -42,10 +43,16 @@ function action(action) {
     if (action == 'download') {
         let pm;
         mod.download((max) => {
-            pm = pmodal('Downloading', () => { }, max);
+            pm = pmodal('Downloading', () => {
+                down = true;
+            }, max);
         }, (p) => pm(p));
     }
     if (action == 'upload') {
+        if (!down) {
+            M.toast({html: 'You first need to download reBrawl files!', classes: 'red' });
+            return;
+        }
         let pm;
         (async function () {
             await mod.mod(stagedMods);
@@ -58,6 +65,10 @@ function action(action) {
         })();
     }
     if (action == 'load:phone') {
+        if (!down) {
+            M.toast({html: 'You first need to download reBrawl files!', classes: 'red' });
+            return;
+        }
         ftpapi.ls('/sdcard').then(async e => {
             let maps = [];
             for (let f of e) {
@@ -72,6 +83,10 @@ function action(action) {
         });
     }
     if (action == 'load:pc') {
+        if (!down) {
+            M.toast({html: 'You first need to download reBrawl files!', classes: 'red' });
+            return;
+        }
         let inp = document.createElement('input');
         inp.type = 'file';
         inp.onchange = function () {
@@ -86,6 +101,10 @@ function action(action) {
         inp.click();
     }
     if (action == 'stage') {
+        if (!down) {
+            M.toast({html: 'You first need to download reBrawl files!', classes: 'red' });
+            return;
+        }
         let name = document.querySelector('#mapname').value;
         q.push(name);
         stagedMods.push({
@@ -93,6 +112,7 @@ function action(action) {
             name,
             maptype: document.querySelector('#modeselect').value
         });
+        refreshCollections();   
     }
 }
 let q = [], installed = [];
