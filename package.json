@@ -12,7 +12,7 @@
   "dependencies": {
     "dialogs": "^2.0.1",
     "ftp": "^0.3.10",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "materialize-css": "^1.0.0-rc.2"
   },
   "build": {
